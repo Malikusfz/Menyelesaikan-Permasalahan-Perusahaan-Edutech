@@ -1,4 +1,5 @@
 <!-- filepath: d:\IDCamp\Mahir\Last\README.md -->
+
 # Proyek Akhir: Menyelesaikan Permasalahan Perusahaan Edutech
 
 ## Business Understanding
@@ -73,14 +74,18 @@ pip list
 
 ## Business Dashboard
 
-Aplikasi ini menyediakan dashboard analitik komprehensif yang memvisualisasikan data mahasiswa dan memberikan wawasan tentang faktor-faktor yang mempengaruhi tingkat dropout. Dashboard ini mencakup:
+Perusahaan menggunakan dashboard analitik komprehensif berbasis Looker Studio yang memvisualisasikan data mahasiswa dan memberikan wawasan tentang faktor-faktor yang mempengaruhi tingkat dropout. Dashboard ini mencakup:
 
-1. Distribusi status mahasiswa (Graduate, Dropout, Enrolled)
-2. Analisis faktor-faktor kunci yang berkontribusi pada risiko dropout
-3. Visualisasi statistik performa model
-4. Perbandingan performa akademik antara mahasiswa dropout dan lulusan
+1. Ringkasan metrik utama (Total Student, % Dropout, % Graduate, Average 1st-Semester Grade)
+2. Status Distribution - visualisasi distribusi mahasiswa berdasarkan status (Graduate, Dropout, Enrolled)
+3. % Dropout by Course - analisis tingkat dropout untuk setiap program studi
+4. Target vs Actual - perbandingan tingkat dropout aktual dengan target institusi
+5. Scholarship vs Status - analisis hubungan antara status beasiswa dan tingkat kelulusan
+6. Age by Status - distribusi umur mahasiswa berdasarkan status akademik
 
-Link untuk mengakses dashboard: [Student Dropout Risk Prediction](https://malikusfz-menyelesaikan-permasalahan-perusahaan-edut-app-yw31x7.streamlit.app/)
+Dashboard ini memungkinkan tim akademik untuk memantau tren dropout secara real-time, mengidentifikasi program studi dengan risiko tinggi, dan mengevaluasi efektivitas program intervensi.
+
+Link untuk mengakses dashboard: [Student Performance Dashboard - Jaya Jaya Institut](https://lookerstudio.google.com/reporting/f1a641f4-544f-4f1a-b753-c4f0c9ac2655)
 
 ## Menjalankan Sistem Machine Learning
 
