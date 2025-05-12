@@ -41,3 +41,49 @@ venv.bak/
 
 # macOS specific
 .DS_Store
+
+# Model files and data
+*.pkl
+*.h5
+*.model
+*.joblib
+*.sav
+
+# Data files
+*.csv
+*.xlsx
+*.xls
+*.json
+!feature_names.json  # Keep this specific JSON file
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# ML specific
+catboost_info/
+mlruns/
+wandb/
+tensorboard/
+runs/
+
+# IDE specific
+.idea/
+*.swp
+*.swo
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Virtual environment
+venv/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# System Files
+Thumbs.db
+desktop.ini
