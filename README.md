@@ -1,139 +1,125 @@
+<!-- filepath: d:\IDCamp\Mahir\Last\README.md -->
 # Proyek Akhir: Menyelesaikan Permasalahan Perusahaan Edutech
 
 ## Business Understanding
 
-Jelaskan latar belakang bisnis dari perushaan tersebut.
+Perusahaan Edutech ini adalah institusi pendidikan tinggi yang menyediakan berbagai program studi untuk mahasiswa. Namun, institusi ini menghadapi tingkat putus sekolah (dropout) yang cukup tinggi. Hal ini tidak hanya memengaruhi reputasi institusi tetapi juga menyebabkan kerugian finansial dan menurunkan efektivitas program pendidikan yang ditawarkan.
 
 ### Permasalahan Bisnis
 
-Tuliskan seluruh permasalahan bisnis yang akan diselesaikan.
+1. Tingkat dropout mahasiswa yang tinggi dan tidak terprediksi dengan baik
+2. Kesulitan dalam mengidentifikasi mahasiswa yang berisiko putus sekolah sejak dini
+3. Kurangnya pemahaman tentang faktor-faktor utama yang berkontribusi pada keputusan mahasiswa untuk berhenti studi
+4. Tidak adanya sistem peringatan dini untuk intervensi tepat waktu
+5. Penurunan retensi mahasiswa yang berdampak pada keuangan institusi
 
 ### Cakupan Proyek
 
-Tuliskan cakupan proyek yang akan dikerjakan.
+1. Menganalisis data historis mahasiswa untuk memahami pola dan tren dropout
+2. Membangun model machine learning untuk memprediksi risiko dropout mahasiswa
+3. Mengidentifikasi faktor-faktor kunci yang memengaruhi keputusan dropout
+4. Mengembangkan sistem prediksi berbasis web yang dapat digunakan oleh staf akademik
+5. Memberikan rekomendasi intervensi berdasarkan analisis untuk meningkatkan retensi mahasiswa
 
 ### Persiapan
 
-Sumber data: ....
+Sumber data: Dataset akademik mahasiswa yang berisi informasi demografis, kinerja akademik, dan status kelulusan.
 
 Setup environment:
 
+1. Pastikan Python sudah terinstall
+
+```bash
+python --version
 ```
 
+2. Buat virtual environment (jika belum ada)
+
+```bash
+python -m venv .env
+```
+
+3. Aktifkan virtual environment (pilih sesuai sistem operasi)
+
+Untuk Windows PowerShell:
+
+```bash
+.\.env\Scripts\Activate.ps1
+```
+
+Untuk Command Prompt Windows:
+
+```bash
+.\.env\Scripts\activate.bat
+```
+
+Untuk bash/Linux/MacOS:
+
+```bash
+source .env/bin/activate
+```
+
+4. Install dependencies yang diperlukan
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Verifikasi instalasi
+
+```bash
+pip list
 ```
 
 ## Business Dashboard
 
-Jelaskan tentang business dashboard yang telah dibuat. Jika ada, sertakan juga link untuk mengakses dashboard tersebut.
+Aplikasi ini menyediakan dashboard analitik komprehensif yang memvisualisasikan data mahasiswa dan memberikan wawasan tentang faktor-faktor yang mempengaruhi tingkat dropout. Dashboard ini mencakup:
+
+1. Distribusi status mahasiswa (Graduate, Dropout, Enrolled)
+2. Analisis faktor-faktor kunci yang berkontribusi pada risiko dropout
+3. Visualisasi statistik performa model
+4. Perbandingan performa akademik antara mahasiswa dropout dan lulusan
+
+Link untuk mengakses dashboard: [Student Dropout Risk Prediction](https://malikusfz-menyelesaikan-permasalahan-perusahaan-edut-app-yw31x7.streamlit.app/)
 
 ## Menjalankan Sistem Machine Learning
 
-Aplikasi ini menggunakan model machine learning (XGBoost) untuk memprediksi risiko seorang mahasiswa mengalami dropout dari perkuliahan. Model dilatih menggunakan dataset yang berisi informasi akademik, demografis, dan sosial-ekonomi mahasiswa.
+Sistem machine learning yang dikembangkan menggunakan algoritma XGBoost untuk memprediksi risiko dropout mahasiswa. Untuk menjalankan sistem ini secara lokal:
 
-### Cara Menjalankan Aplikasi Secara Lokal
+1. Pastikan virtual environment sudah aktif (jika belum, aktifkan dengan)
 
-#### Prasyarat
-
-- Python 3.7 atau lebih baru
-- pip (Python package manager)
-
-#### Langkah-langkah Instalasi (Windows)
-
-**Metode 1: Menggunakan file batch**
-
-1. Clone repository atau download source code aplikasi
-2. Double-click pada file `run_app.bat`
-3. File batch akan otomatis menginstal dependency dan menjalankan aplikasi
-
-**Metode 2: Menggunakan command line**
-
-1. Clone repository atau download source code aplikasi
-
-2. Buka terminal/command prompt dan navigasi ke direktori proyek:
-
-   ```
-   cd path/to/project
-   ```
-
-3. Install semua dependensi yang diperlukan:
-
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. Jalankan setup script untuk memverifikasi instalasi:
-
-   ```
-   python setup.py
-   ```
-
-5. Jalankan aplikasi Streamlit:
-
-   ```
-   streamlit run app.py
-   ```
-
-6. Aplikasi akan terbuka secara otomatis di browser web Anda. Jika tidak, buka browser dan kunjungi URL berikut:
-   ```
-   http://localhost:8501
-   ```
-
-#### Mengatasi Error "ModuleNotFoundError: No module named 'imblearn'"
-
-Jika Anda mengalami error "ModuleNotFoundError: No module named 'imblearn'", pastikan untuk menginstal library imbalanced-learn:
-
-```
-pip install imbalanced-learn
+```bash
+.\.env\Scripts\Activate.ps1
 ```
 
-Kemudian restart aplikasi Streamlit.
+2. Jalankan aplikasi Streamlit
 
-### Fitur Utama Aplikasi
+```bash
+streamlit run app.py
+```
 
-- Prediksi probabilitas dropout mahasiswa
-- Visualisasi faktor-faktor yang mempengaruhi dropout
-- Rekomendasi tindakan berdasarkan tingkat risiko
-- Analisis statistik dataset
+Aplikasi akan tersedia di browser pada alamat `http://localhost:8501`. Pengguna dapat memasukkan informasi mahasiswa di tab Prediction dan sistem akan menghasilkan prediksi risiko dropout beserta rekomendasi intervensi.
 
-### Mengakses Versi Online
-
-Aplikasi ini juga tersedia secara online melalui Streamlit Community Cloud di:
-[https://dropout-prediction.streamlit.app](https://dropout-prediction.streamlit.app)
-
-### Deployment ke Streamlit Community Cloud
-
-Untuk men-deploy aplikasi ini ke Streamlit Community Cloud:
-
-1. Buat repository GitHub baru dan push semua file proyek ke dalamnya
-
-2. Pastikan struktur repository Anda memiliki:
-
-   - app.py (file utama aplikasi)
-   - requirements.txt (daftar dependensi)
-   - model_dropout.pkl (model machine learning yang telah dilatih)
-   - feature_names.json (nama fitur yang digunakan model)
-   - data.csv (dataset untuk analisis)
-
-3. Kunjungi [share.streamlit.io](https://share.streamlit.io/) dan login dengan akun GitHub Anda
-
-4. Klik "New app" dan pilih repository yang berisi proyek ini
-
-5. Konfigurasi deployment:
-
-   - Repository: [nama-repo]
-   - Branch: main
-   - Main file path: app.py
-   - Klik "Deploy!"
-
-6. Tunggu beberapa saat hingga deployment selesai dan aplikasi siap digunakan
+Link untuk mengakses prototype sistem: [Student Dropout Risk Prediction](https://malikusfz-menyelesaikan-permasalahan-perusahaan-edut-app-yw31x7.streamlit.app/)
 
 ## Conclusion
 
-Jelaskan konklusi dari proyek yang dikerjakan.
+Berdasarkan analisis data dan model machine learning yang dikembangkan, dapat disimpulkan bahwa:
+
+1. Model XGBoost yang dikembangkan mencapai akurasi 88.07% dalam memprediksi risiko dropout mahasiswa
+2. Performa akademik semester pertama adalah prediktor terkuat untuk risiko dropout, diikuti oleh faktor keuangan
+3. Mahasiswa dengan beasiswa menunjukkan tingkat kelulusan yang lebih tinggi dibandingkan mahasiswa tanpa beasiswa
+4. Faktor-faktor seperti umur, status perkawinan, dan mode aplikasi juga memiliki pengaruh signifikan terhadap risiko dropout
+5. Implementasi sistem peringatan dini dapat secara signifikan meningkatkan retensi mahasiswa dan mengurangi kerugian finansial institusi
 
 ### Rekomendasi Action Items
 
-Berikan beberapa rekomendasi action items yang harus dilakukan perusahaan guna menyelesaikan permasalahan atau mencapai target mereka.
+Berdasarkan hasil analisis, berikut adalah rekomendasi tindakan untuk mengurangi tingkat dropout mahasiswa:
 
-- action item 1
-- action item 2
+- Implementasikan program mentoring khusus untuk mahasiswa yang menunjukkan performa rendah pada semester pertama
+- Kembangkan program bantuan keuangan tambahan dan opsi pembayaran fleksibel untuk mahasiswa dengan kendala finansial
+- Buat program intervensi akademik dini yang dipicu oleh hasil evaluasi pertama yang buruk
+- Tingkatkan layanan dukungan untuk kelompok demografi dengan risiko dropout tinggi
+- Selenggarakan sesi orientasi dan integrasi yang lebih komprehensif untuk mahasiswa baru
+- Evaluasi dan revisi kurikulum mata kuliah dengan tingkat kegagalan tinggi
+- Implementasikan pemantauan berkelanjutan menggunakan sistem prediksi risiko dropout yang telah dikembangkan
