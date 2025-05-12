@@ -9,17 +9,14 @@ import plotly.graph_objects as go
 import seaborn as sns
 from pathlib import Path
 
-# Set page config
 st.set_page_config(
     page_title="Prediksi Risiko Drop Out Mahasiswa",
     page_icon="🎓",
     layout="wide"
 )
 
-# Update custom CSS for professional UI with dark mode theme
 st.markdown("""
 <style>
-    /* Typography */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
     
     html, body, [class*="css"] {
@@ -34,20 +31,17 @@ st.markdown("""
         color: #FFFFFF;
     }
     
-    /* Main background for the app */
     .main, .block-container, [data-testid="stAppViewContainer"] {
         background-color: #0E1117 !important;
         color: #E0E0E0;
     }
     
-    /* Container styles */
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
         max-width: 1200px;
     }
     
-    /* Professional Card styling */
     .metric-card {
         border-radius: 12px;
         padding: 1.5rem;
@@ -80,7 +74,6 @@ st.markdown("""
         color: #B8C7E0 !important;
     }
     
-    /* Button styling - professional */
     .stButton>button {
         background: linear-gradient(90deg, #5E72E4, #825EE4);
         color: white;
@@ -100,7 +93,6 @@ st.markdown("""
         transform: translateY(-2px);
     }
     
-    /* Input fields styling */
     [data-baseweb="select"] {
         background-color: #1A1F2C !important;
         border-radius: 8px !important;
@@ -114,7 +106,6 @@ st.markdown("""
         color: #E0E0E0 !important;
     }
     
-    /* Section headers - professional */
     .section-header {
         padding: 1rem;
         border-radius: 10px;
@@ -123,7 +114,6 @@ st.markdown("""
         background-color: rgba(30, 34, 45, 0.5);
     }
     
-    /* Prediction result styling - professional */
     .prediction-container {
         border-radius: 16px;
         padding: 2rem;
@@ -142,7 +132,6 @@ st.markdown("""
         border-bottom: 1px solid rgba(128, 128, 128, 0.3);
     }
     
-    /* Tabs styling - professional */
     .stTabs [data-baseweb="tab-list"] {
         gap: 2rem;
         background-color: transparent !important;
@@ -167,7 +156,6 @@ st.markdown("""
         color: #FFFFFF !important;
     }
     
-    /* Data tables */
     [data-testid="stDataFrame"] {
         border-radius: 8px;
         overflow: hidden;
@@ -201,7 +189,6 @@ st.markdown("""
         color: #E0E0E0 !important;
     }
     
-    /* Success, warning, error message styling */
     .stSuccess, .stWarning, .stError, .stInfo {
         border-radius: 10px;
         padding: 1rem !important;
@@ -226,7 +213,6 @@ st.markdown("""
         border-left: 4px solid #4299E1 !important;
     }
     
-    /* Sidebar styling */
     [data-testid="stSidebar"] {
         background-color: rgba(19, 23, 32, 0.95) !important;
         border-right: 1px solid rgba(50, 59, 82, 0.3);
@@ -236,7 +222,6 @@ st.markdown("""
         background-color: transparent !important;
     }
     
-    /* Expander styling */
     .streamlit-expanderHeader {
         font-weight: 600 !important;
         font-size: 1.1rem !important;
@@ -253,7 +238,6 @@ st.markdown("""
         border-radius: 0 0 8px 8px;
     }
     
-    /* Selectbox styling */
     div[data-baseweb="select"] > div {
         border-radius: 8px !important;
         background-color: rgba(26, 32, 44, 0.7) !important;
@@ -274,12 +258,10 @@ st.markdown("""
         background-color: rgba(94, 114, 228, 0.2) !important;
     }
     
-    /* Tooltip enhancements */
     .stTooltipIcon {
         color: #5E72E4 !important;
     }
     
-    /* Slider styling */
     [data-testid="stSlider"] > div {
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
@@ -289,7 +271,6 @@ st.markdown("""
         color: #FFFFFF !important;
     }
     
-    /* Application title styling */
     .app-title {
         text-align: center;
         padding: 1rem 0 2rem 0;
@@ -306,7 +287,6 @@ st.markdown("""
         display: inline-block;
     }
     
-    /* Label text styling */
     .stSelectbox label, .stNumberInput label, .stSlider label {
         font-weight: 500 !important;
         font-size: 0.95rem !important;
@@ -314,7 +294,6 @@ st.markdown("""
         color: #B8C7E0 !important;
     }
     
-    /* Chart container */
     .chart-container {
         border-radius: 12px;
         overflow: hidden;
@@ -325,7 +304,6 @@ st.markdown("""
         border: 1px solid rgba(101, 119, 201, 0.2);
     }
     
-    /* Metrics delta colors */
     [data-testid="stMetricDelta"] {
         color: #48BB78 !important;
     }
@@ -334,13 +312,11 @@ st.markdown("""
         color: #48BB78 !important;
     }
     
-    /* Code blocks */
     .stCodeBlock {
         border-radius: 8px !important;
         background-color: #1A1F2C !important;
     }
     
-    /* File uploader */
     [data-testid="stFileUploader"] {
         background-color: rgba(26, 32, 44, 0.7) !important;
         border: 1px dashed rgba(94, 114, 228, 0.5) !important;
@@ -352,12 +328,10 @@ st.markdown("""
         background-color: transparent !important;
     }
     
-    /* Checkbox and Radio */
     [data-testid="stCheckbox"] label, [data-testid="stRadio"] label {
         color: #E0E0E0 !important;
     }
     
-    /* For scrollbars */
     ::-webkit-scrollbar {
         width: 10px;
         height: 10px;
@@ -377,23 +351,19 @@ st.markdown("""
         background: #5E72E4;
     }
     
-    /* Make sure all text inputs have the right colors */
     input, textarea {
         color: #E0E0E0 !important;
         background-color: #1A1F2C !important;
     }
     
-    /* Progress bar */
     [data-testid="stProgress"] > div > div {
         background-color: #5E72E4 !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Cache functions for loading data and model
 @st.cache_resource
 def load_model():
-    """Load the pre-trained model and feature names"""
     with open('model_dropout.pkl', 'rb') as f:
         model = pickle.load(f)
     with open('feature_names.json', 'r') as f:
@@ -402,10 +372,8 @@ def load_model():
 
 @st.cache_data
 def load_data():
-    """Load the dataset for analysis"""
     return pd.read_csv('data.csv')
 
-# Load model and data
 try:
     model, feature_names = load_model()
     df = load_data()
@@ -413,9 +381,7 @@ except Exception as e:
     st.error(f"Error loading model or data: {str(e)}")
     st.stop()
 
-# Define visualization functions with enhanced styling
 def plot_feature_importance(model, feature_names):
-    """Create feature importance plot with improved styling and dark mode compatibility"""
     feature_importances = model.named_steps['clf'].feature_importances_
     feature_names_display = [name.replace('_', ' ').title() for name in feature_names]
     
@@ -424,14 +390,12 @@ def plot_feature_importance(model, feature_names):
         'Importance': feature_importances
     }).sort_values('Importance', ascending=False).head(10)
     
-    # Check if dark theme is active
     is_dark_theme = True if st.get_option("theme.base") == "dark" else False
     
     text_color = "white" if is_dark_theme else "black"
     plot_bg_color = "rgba(0,0,0,0)" if is_dark_theme else "white"
     grid_color = "rgba(255,255,255,0.1)" if is_dark_theme else "rgba(0,0,0,0.1)"
     
-    # Professional color gradient
     color_scale = px.colors.sequential.Blues if not is_dark_theme else px.colors.sequential.Plasma
     
     fig = px.bar(
@@ -477,16 +441,13 @@ def plot_feature_importance(model, feature_names):
     return fig
 
 def plot_dropout_stats(df):
-    """Create enhanced pie chart for dropout statistics with dark mode support"""
     status_counts = df['Status'].value_counts()
     
-    # Check if dark theme is active
     is_dark_theme = True if st.get_option("theme.base") == "dark" else False
     
     text_color = "white" if is_dark_theme else "black"
     plot_bg_color = "rgba(0,0,0,0)" if is_dark_theme else "white"
     
-    # Professional color palette
     colors = ['#0078D4', '#FF8C00'] if not is_dark_theme else ['#00B7C3', '#FF5733']
     
     fig = go.Figure(data=[go.Pie(
@@ -538,19 +499,15 @@ def plot_dropout_stats(df):
     return fig
 
 def plot_model_performance():
-    """Create visualization of model performance metrics with dark mode support"""
-    # CV Accuracy plot
     cv_scores = [0.8701, 0.8621, 0.8904, 0.8881, 0.8925]
     mean_score = np.mean(cv_scores)
     
-    # Check if dark theme is active
     is_dark_theme = True if st.get_option("theme.base") == "dark" else False
     
     text_color = "white" if is_dark_theme else "black"
     plot_bg_color = "rgba(0,0,0,0)" if is_dark_theme else "white"
     grid_color = "rgba(255,255,255,0.1)" if is_dark_theme else "rgba(0,0,0,0.1)"
     
-    # Professional color palette
     colors = {
         'cv': '#0078D4',
         'mean': '#FF0000',
@@ -560,7 +517,6 @@ def plot_model_performance():
     
     fig = go.Figure()
     
-    # Add CV scores as bars
     fig.add_trace(go.Bar(
         x=[f"Fold {i+1}" for i in range(len(cv_scores))],
         y=cv_scores,
@@ -569,7 +525,6 @@ def plot_model_performance():
         hovertemplate='<b>%{x}</b><br>Accuracy: %{y:.4f}<extra></extra>'
     ))
     
-    # Add mean line
     fig.add_trace(go.Scatter(
         x=[f"Fold {i+1}" for i in range(len(cv_scores))],
         y=[mean_score] * len(cv_scores),
@@ -579,7 +534,6 @@ def plot_model_performance():
         hovertemplate=f'Mean Accuracy: {mean_score:.4f}<extra></extra>'
     ))
     
-    # Add precision and recall for both classes
     fig.add_trace(go.Bar(
         x=['Non-Dropout', 'Dropout'],
         y=[0.90, 0.85],
@@ -638,8 +592,6 @@ def plot_model_performance():
     return fig
 
 def create_numeric_distribution(df, feature, title):
-    """Create enhanced distribution plot for numeric features with dark mode support"""
-    # Check if dark theme is active
     is_dark_theme = True if st.get_option("theme.base") == "dark" else False
     
     text_color = "white" if is_dark_theme else "black"
@@ -671,8 +623,6 @@ def create_numeric_distribution(df, feature, title):
     return fig
 
 def create_categorical_plot(df_melted, x, title):
-    """Create enhanced bar chart for categorical features with dark mode support"""
-    # Check if dark theme is active
     is_dark_theme = True if st.get_option("theme.base") == "dark" else False
     
     text_color = "white" if is_dark_theme else "black"
@@ -701,14 +651,12 @@ def create_categorical_plot(df_melted, x, title):
         yaxis=dict(gridcolor=grid_color)
     )
     
-    text_color_inside = "black" if is_dark_theme else "white"  # Inverted for visibility on bars
+    text_color_inside = "black" if is_dark_theme else "white"
     fig.update_traces(texttemplate='%{text}%', textposition='inside', textfont=dict(color=text_color_inside))
     
     return fig
 
-# Main application header
 def render_app_header():
-    """Render the application header with logo and title"""
     st.markdown('<div class="app-title">', unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 3, 1])
     with col2:
@@ -716,9 +664,7 @@ def render_app_header():
         st.markdown('<p style="text-align: center; margin-top: -0.5rem; font-size: 1.1rem; opacity: 0.8;">AI-powered early warning system for student retention</p>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Refactored tab functions
 def render_prediction_tab():
-    """Render the prediction tab content with professional styling"""
     st.markdown('<div class="section-header"><h2>Student Data Input</h2></div>', unsafe_allow_html=True)
     st.markdown("""
     <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">
@@ -727,7 +673,6 @@ def render_prediction_tab():
     </p>
     """, unsafe_allow_html=True)
     
-    # Create tabs for different categories of inputs to improve organization
     input_tabs = st.tabs([
         "📋 Personal & Academic", 
         "💰 Financial", 
@@ -735,7 +680,6 @@ def render_prediction_tab():
         "🎓 Second Semester"
     ])
     
-    # Tab 1: Personal & Academic Information
     with input_tabs[0]:
         col1, col2 = st.columns(2)
         
@@ -810,7 +754,6 @@ def render_prediction_tab():
                 help="Does the student have a scholarship?"
             )
     
-    # Tab 2: Financial & Socioeconomic Information
     with input_tabs[1]:
         col1, col2 = st.columns(2)
         
@@ -862,7 +805,6 @@ def render_prediction_tab():
                 help="Gross Domestic Product growth rate at enrollment"
             )
     
-    # Tab 3: First Semester Performance
     with input_tabs[2]:
         st.markdown('<div class="section-header"><h3>First Semester Performance</h3></div>', unsafe_allow_html=True)
         col1, col2 = st.columns(2)
@@ -914,7 +856,6 @@ def render_prediction_tab():
                 help="Number of curricular units without evaluation in the first semester"
             )
     
-    # Tab 4: Second Semester Performance
     with input_tabs[3]:
         st.markdown('<div class="section-header"><h3>Second Semester Performance</h3></div>', unsafe_allow_html=True)
         col1, col2 = st.columns(2)
@@ -966,26 +907,24 @@ def render_prediction_tab():
                 help="Number of curricular units without evaluation in the second semester"
             )
     
-    # Predict button - centered and prominent
     st.markdown('<div style="text-align: center; margin: 2rem 0;">', unsafe_allow_html=True)
     predict_button = st.button("Analyze Dropout Risk", type="primary", use_container_width=False)
     st.markdown('</div>', unsafe_allow_html=True)
     
     if predict_button:
-        # Create a dictionary with the input values
         input_data = {
             "Marital_status": float(marital_status),
-            "Application_mode": 1.0,  # Default value
-            "Application_order": 1.0,  # Default value
+            "Application_mode": 1.0,
+            "Application_order": 1.0,
             "Course": float(course),
             "Daytime_evening_attendance": float(daytime_evening),
             "Previous_qualification": float(previous_qual),
             "Previous_qualification_grade": float(admission_grade),
-            "Nacionality": 1.0,  # Default value
-            "Mothers_qualification": 1.0,  # Default value
-            "Fathers_qualification": 1.0,  # Default value
-            "Mothers_occupation": 1.0,  # Default value
-            "Fathers_occupation": 1.0,  # Default value
+            "Nacionality": 1.0,
+            "Mothers_qualification": 1.0,
+            "Fathers_qualification": 1.0,
+            "Mothers_occupation": 1.0,
+            "Fathers_occupation": 1.0,
             "Admission_grade": float(admission_grade),
             "Displaced": float(displaced),
             "Educational_special_needs": float(special_needs),
@@ -1012,21 +951,16 @@ def render_prediction_tab():
             "GDP": float(gdp)
         }
         
-        # Convert to DataFrame for prediction
         input_df = pd.DataFrame([input_data])
         
-        # Make prediction with progress animation and professional styled container
         with st.spinner('Processing prediction...'):
             probability = model.predict_proba(input_df)[0][1]
             prediction = model.predict(input_df)[0]
         
-        # Display results with enhanced professional formatting
         st.markdown('<div class="prediction-container">', unsafe_allow_html=True)
         
-        # Risk level with theme-aware colors
         is_dark_theme = True if st.get_option("theme.base") == "dark" else False
         
-        # Define text_color based on the theme - fix for NameError
         text_color = "white" if is_dark_theme else "black"
         
         if probability < 0.3:
@@ -1042,13 +976,11 @@ def render_prediction_tab():
             color = "#EF553B" if is_dark_theme else "red"
             gauge_color = "#EF553B"
         
-        # Add professional header for prediction
         st.markdown('<div class="prediction-result-header">', unsafe_allow_html=True)
         st.markdown(f"<h2 style='text-align: center; margin-bottom: 0.5rem;'>Analysis Results</h2>", unsafe_allow_html=True)
         st.markdown(f"<h3 style='text-align: center; color: {color}; margin-top: 0;'>Risk Level: {risk_level}</h3>", unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # Create a gauge chart for probability
         gauge = go.Figure(go.Indicator(
             mode = "gauge+number",
             value = probability * 100,
@@ -1084,12 +1016,10 @@ def render_prediction_tab():
         
         st.plotly_chart(gauge, use_container_width=True)
         
-        # Display status prediction
         status = "Dropout" if prediction == 1 else "Graduate"
         icon = "🚫" if prediction == 1 else "🎓"
         st.markdown(f"<h4 style='text-align: center; margin-bottom: 1.5rem;'>Predicted Status: {icon} {status}</h4>", unsafe_allow_html=True)
         
-        # Add professional recommendations section
         st.markdown('<div class="section-header" style="margin-top: 1rem;"><h3>Recommended Interventions</h3></div>', unsafe_allow_html=True)
         
         if risk_level == "Low":
@@ -1126,30 +1056,22 @@ def render_prediction_tab():
             - Connect with counseling services for non-academic challenges
             """)
         
-        # Add a collapsible section with key factors
         with st.expander("View Key Risk Factors"):
-            # Create a radar chart of important features for this student
             top_features = ["Age_at_enrollment", "Curricular_units_1st_sem_approved", 
                            "Curricular_units_1st_sem_grade", "Scholarship_holder", "Debtor"]
             feature_values = [input_data[f] for f in top_features]
             
-            # Normalize values for radar chart
             normalized_values = []
             for i, f in enumerate(top_features):
                 if f == "Age_at_enrollment":
-                    # Age: normalize between 18-40
                     normalized_values.append(min(max((feature_values[i] - 18) / (40 - 18), 0), 1))
                 elif f == "Curricular_units_1st_sem_grade":
-                    # Grades: normalize between 0-20
                     normalized_values.append(feature_values[i] / 20)
                 elif f == "Curricular_units_1st_sem_approved":
-                    # Approved units: normalize between 0-12
                     normalized_values.append(feature_values[i] / 12)
                 else:
-                    # Binary features: already 0-1
                     normalized_values.append(feature_values[i])
             
-            # Display readable feature names
             readable_features = [
                 "Age", "Approved Units (Sem 1)", 
                 "Grade Average (Sem 1)", "Scholarship Status", "Debtor Status"
@@ -1196,7 +1118,6 @@ def render_prediction_tab():
         st.markdown('</div>', unsafe_allow_html=True)
 
 def render_statistics_tab():
-    """Render the statistics tab content with professional styling"""
     st.markdown('<div class="section-header"><h2>Dataset Analysis</h2></div>', unsafe_allow_html=True)
     
     st.markdown("""
@@ -1206,7 +1127,6 @@ def render_statistics_tab():
     </p>
     """, unsafe_allow_html=True)
     
-    # Dashboard-style overview with metrics
     st.markdown('<h3>Dataset Overview</h3>', unsafe_allow_html=True)
     col_stats1, col_stats2, col_stats3, col_stats4 = st.columns(4)
     
@@ -1233,7 +1153,6 @@ def render_statistics_tab():
         st.metric("Graduation Rate", f"{graduate_rate:.1f}%")
         st.markdown('</div>', unsafe_allow_html=True)
     
-    # Enhanced visualizations
     st.markdown('<div class="section-header"><h3>Data Visualizations</h3></div>', unsafe_allow_html=True)
     viz_tabs = st.tabs(["Student Status", "Influential Factors", "Model Performance"])
     
@@ -1275,14 +1194,11 @@ def render_statistics_tab():
                 })
                 st.dataframe(report_data, use_container_width=True)
     
-    # Deep dive analysis with factor selector
     st.markdown('<div class="section-header"><h3>Factor Analysis</h3></div>', unsafe_allow_html=True)
     
-    # Create dataframe with dropout flag for analysis
     df_analysis = df.copy()
     df_analysis['Dropout'] = (df_analysis['Status'] == 'Dropout').astype(int)
     
-    # Add a more intuitive factor selector
     factor_mapping = {
         "Age_at_enrollment": "Age at Enrollment",
         "Curricular_units_1st_sem_approved": "Approved Units (Sem 1)",
@@ -1302,14 +1218,12 @@ def render_statistics_tab():
     )
     selected_factor = reverse_mapping[selected_factor_display]
     
-    # Display different charts based on the type of factor
     st.markdown('<div class="chart-container">', unsafe_allow_html=True)
     if selected_factor in ["Age_at_enrollment", "Curricular_units_1st_sem_approved", 
                         "Curricular_units_1st_sem_grade", "Curricular_units_2nd_sem_approved"]:
         fig = create_numeric_distribution(df, selected_factor, f"Distribution of {selected_factor_display} by Status")
         st.plotly_chart(fig, use_container_width=True)
         
-        # Add summary statistics in cards
         col_sum1, col_sum2 = st.columns(2)
         with col_sum1:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
@@ -1329,7 +1243,6 @@ def render_statistics_tab():
             st.write(f"**Std Dev:** {graduate_stats['std']:.2f}")
             st.markdown('</div>', unsafe_allow_html=True)
     else:
-        # For categorical features
         cross_tab = pd.crosstab(
             df_analysis[selected_factor], df_analysis["Status"], 
             normalize='index'
@@ -1346,16 +1259,13 @@ def render_statistics_tab():
         st.plotly_chart(fig, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Add table view of data with professional styling
     st.markdown(f"<h4>Detailed Breakdown by {selected_factor_display}</h4>", unsafe_allow_html=True)
     
-    # Format table for better presentation
     formatted_table = pd.crosstab(
         df_analysis[selected_factor], df_analysis["Status"],
         margins=True, margins_name="Total"
     ).reset_index()
     
-    # Map binary features to readable values
     if selected_factor in ["Debtor", "Tuition_fees_up_to_date", "Scholarship_holder", "Gender"]:
         if selected_factor == "Gender":
             mapping = {0: "Female", 1: "Male"}
@@ -1367,7 +1277,6 @@ def render_statistics_tab():
     
     st.dataframe(formatted_table, use_container_width=True)
     
-    # Add insights section
     st.markdown('<div class="section-header"><h3>Key Insights</h3></div>', unsafe_allow_html=True)
     
     if selected_factor == "Curricular_units_1st_sem_approved":
@@ -1400,7 +1309,6 @@ def render_statistics_tab():
         """)
 
 def render_about_tab():
-    """Render the about tab content with professional styling"""
     st.markdown('<div class="section-header"><h2>About This Application</h2></div>', unsafe_allow_html=True)
     
     col1, col2 = st.columns([2,1])
@@ -1430,7 +1338,6 @@ def render_about_tab():
     with col2:
         st.image("https://cdn-icons-png.flaticon.com/512/2452/2452279.png", width=200)
     
-    # Model details with professional styling
     st.markdown('<div class="section-header"><h3>The Prediction Model</h3></div>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
@@ -1465,7 +1372,6 @@ def render_about_tab():
         that at-risk students are not overlooked.
         """)
     
-    # Dataset information in an expander
     with st.expander("Dataset Information"):
         st.markdown("""
         #### About the Dataset
@@ -1482,7 +1388,6 @@ def render_about_tab():
         to ensure privacy and representativeness.
         """)
     
-    # Implementation details in an expander
     with st.expander("Technical Implementation"):
         st.markdown("""
         #### Technology Stack
@@ -1499,7 +1404,6 @@ def render_about_tab():
         student information systems for automated risk assessment.
         """)
     
-    # References and disclaimer
     st.markdown('<div class="section-header"><h3>References & Disclaimer</h3></div>', unsafe_allow_html=True)
     
     st.markdown("""
@@ -1517,11 +1421,9 @@ def render_about_tab():
     when making intervention decisions.
     """)
     
-    # Developers section
     st.markdown("#### Development Team")
     st.write("This application was developed as part of the IDCamp Machine Learning Track final project.")
 
-# Main app structure - Create tabs and call the refactored functions
 render_app_header()
 tab1, tab2, tab3 = st.tabs(["🔮 Prediction", "📊 Dataset Statistics", "ℹ️ About"])
 
